@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package servicepb;
+
+option go_package = "github.com/ManoVikram/NL-To-SQL-With-AI/api/proto";
+
+message Cell {
+    oneof value {
+        string string_value = 1;
+        int int_value = 2;
+        double double_value = 3;
+        bool bool_value = 4;
+        bytes bytes_value = 5;
+        bool is_null = 6;
+    }
+}
+
+message Column {
+    string name = 1;
+    string type = 2;
+    bool is_nullable = 3;
+}
+
+message Row {
+    repeated Cell cells = 1;
+}
+
+message QueryRequest {
+    string query = 1;
+}
+
+message QueryResponse {
+    bool is_success = 1;
+    string error_message = 2;
+    repeated Column columns = 3;
+    repeated Row rows = 4;
+    QueryMetadata metadata = 5;
+}
+
+service NLToSQLService {
+    rpc QueryDB(QueryRequest) returns (QueryResponse);
+}

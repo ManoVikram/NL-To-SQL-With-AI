@@ -7,7 +7,7 @@ option go_package = "github.com/ManoVikram/NL-To-SQL-With-AI/api/proto";
 message Cell {
     oneof value {
         string string_value = 1;
-        int int_value = 2;
+        int64 int_value = 2;
         double double_value = 3;
         bool bool_value = 4;
         bytes bytes_value = 5;
@@ -27,7 +27,7 @@ message Row {
 
 message QueryMetadata {
     string query_generated = 1;
-    int row_count = 2;
+    int64 row_count = 2;
 }
 
 message QueryRequest {

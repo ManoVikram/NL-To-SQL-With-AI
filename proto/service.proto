@@ -25,6 +25,11 @@ message Row {
     repeated Cell cells = 1;
 }
 
+message QueryMetadata {
+    string query_generated = 1;
+    int row_count = 2;
+}
+
 message QueryRequest {
     string query = 1;
 }

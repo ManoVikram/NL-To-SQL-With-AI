@@ -4,15 +4,8 @@ from concurrent.futures import ThreadPoolExecutor
 import grpc
 from dotenv import load_dotenv
 
-from proto import service_pb2, service_pb2_grpc
-
-
-class NLToSQLServicer(service_pb2_grpc.NLToSQLServiceServicer):
-    def __init__(self):
-        super().__init__()
-
-    def QueryDB(self, request, context):
-        pass
+from proto import service_pb2_grpc
+from servicer import NLToSQLServicer
 
 def serve():
     # Step 1 - Load the environment variables

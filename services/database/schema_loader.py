@@ -1,9 +1,4 @@
-import psycopg2
-
 def load(connection):
-    # Step 1 - Connect to the DB
-    # connection = psycopg2.connect(**DB_CONFIG)
-
     # Step 1 - Create a cursor
     cursor = connection.cursor()
 

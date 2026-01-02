@@ -45,7 +45,6 @@ def enhance(query):
             {"role": "user", "content": user_prompt}
         ]
     )
-
     enhanced_query = response.content[0].text.strip()
 
     return enhanced_query

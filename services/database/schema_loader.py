@@ -1,15 +1,13 @@
 import psycopg2
 
-from database.config import DB_CONFIG
-
-def load():
+def load(connection):
     # Step 1 - Connect to the DB
-    connection = psycopg2.connect(**DB_CONFIG)
+    # connection = psycopg2.connect(**DB_CONFIG)
 
-    # Step 2 - Create a cursor
+    # Step 1 - Create a cursor
     cursor = connection.cursor()
 
-    # Stpp 3 - Fetch the schema details
+    # Stpp 2 - Fetch the schema details
     cursor.execute("""
         SELECT 
             table_name,
@@ -21,7 +19,7 @@ def load():
         ORDER BY table_name, ordinal_position;
     """)
 
-    # Step 4 - Process the results and format the schema for LLM
+    # Step 3 - Process the results and format the schema for LLM
     tables = {}
     for row in cursor.fetchall():
         table_name, column_name, data_type, is_nullable = row
@@ -42,5 +40,8 @@ def load():
                 nullable_text = "nullable" if column["is_nullable"] else "not null"
                 schema_text += f" - {column["column_name"]} ({column["data_type"], {nullable_text}})\n"
             schema_text += "\n"
+
+    # Step 4 - Close the cursor
+    cursor.close()
 
     return schema_text

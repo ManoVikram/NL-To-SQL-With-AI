@@ -25,7 +25,7 @@ func main() {
 	httpPort := os.Getenv("HTTP_PORT")
 
 	if gRPCServer == "" || gRPCPort == "" || httpServer == "" || httpPort == "" {
-		log.Fatalf("One or more required environment variables are not set (GRPC_SERVER=%q, GRPC_PORT=%q, HTTP_SERVER=%q, HTTP_PORT=%q)")
+		log.Fatalf("One or more required environment variables are not set (GRPC_SERVER=%q, GRPC_PORT=%q, HTTP_SERVER=%q, HTTP_PORT=%q)", gRPCServer, gRPCPort, httpServer, httpPort)
 	}
 
 	// Step 2 - Connect to the gRPC server

@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from proto import service_pb2_grpc
 from servicer import NLToSQLServicer
+from pipeline.query_pipeline import QueryPipeline
 
 def serve():
     # Step 1 - Load the environment variables
@@ -16,8 +17,11 @@ def serve():
     # Step 2 - Set up the gRPC server
     server = grpc.server(thread_pool=ThreadPoolExecutor(max_workers=10))
 
+    # Step 3 - Create the pipeline object
+    pipeline = QueryPipeline()
+
     # Step 3 - Add the servicer to the gRPC server
-    service_pb2_grpc.add_NLToSQLServiceServicer_to_server(servicer=NLToSQLServicer(), server=server)
+    service_pb2_grpc.add_NLToSQLServiceServicer_to_server(servicer=NLToSQLServicer(pipeline=pipeline), server=server)
 
     # Step 4 - Bind the server to a port
     grpc_port = os.getenv("GRPC_PORT", 50051)

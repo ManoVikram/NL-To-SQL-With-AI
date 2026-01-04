@@ -7,5 +7,6 @@ import (
 )
 
 func RegisterRoutes(server *gin.Engine, services *services.Service) {
-	server.POST("api/query", handlers.QueryHandler(services))
+	// POST endpoint to handle natural language to SQL queries
+	server.POST("/api/query", handlers.QueryHandler(services))
 }

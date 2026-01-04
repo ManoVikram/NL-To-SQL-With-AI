@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// Step 1 - Load the environment variables
-	godotenv.Load()
+	godotenv.Load("../.env")
 
 	gRPCServer := os.Getenv("GRPC_SERVER")
 	gRPCPort := os.Getenv("GRPC_PORT")

@@ -2,4 +2,4 @@ grpcio
 grpcio-tools
 python-dotenv
 anthropic
-openai
+psycopg[binary,pool]

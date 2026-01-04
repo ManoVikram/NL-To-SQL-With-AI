@@ -1,3 +1,4 @@
+import logging
 import os
 from concurrent.futures import ThreadPoolExecutor
 
@@ -7,6 +8,10 @@ from dotenv import load_dotenv
 from proto import service_pb2_grpc
 from servicer import NLToSQLServicer
 from pipeline.query_pipeline import QueryPipeline
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 def serve():
     # Step 1 - Load the environment variables
@@ -26,6 +31,8 @@ def serve():
     # Step 4 - Bind the server to a port
     grpc_port = os.getenv("GRPC_PORT", 50051)
     server.add_insecure_port(f"[::]:{grpc_port}")
+    logger.info(f"🚀 Python gRPC server started on port {grpc_port}")
+    logger.info("Press Ctrl+C to stop")
 
     # Step 5 - Start the gRPC server
     server.start()

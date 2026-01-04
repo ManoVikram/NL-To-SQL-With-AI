@@ -1,5 +1,8 @@
+import logging
 from proto import service_pb2, service_pb2_grpc
 from pipeline.query_pipeline import QueryPipeline
+
+logger = logging.getLogger(__name__)
 
 
 class NLToSQLServicer(service_pb2_grpc.NLToSQLServiceServicer):
@@ -47,6 +50,7 @@ class NLToSQLServicer(service_pb2_grpc.NLToSQLServiceServicer):
         try:
             # Step 1 - Retrieve the user query from the request
             query = request.query
+            logging.info(f"Received query: {query}")
 
             # Step 2 - Execute the pipeline to convert the natural language query to SQL and execute it and return the results
             result = self.pipeline.execute(user_query=query)
@@ -66,6 +70,7 @@ class NLToSQLServicer(service_pb2_grpc.NLToSQLServiceServicer):
                 )
             )
         except Exception as error:
+            logging.error(f"Error processing query: {error}", exc_info=True)
             return service_pb2.QueryResponse(
                 is_success=False,
                 error_message=str(error),

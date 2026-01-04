@@ -40,8 +40,8 @@ def enhance(query):
     response = client.messages.create(
         max_tokens=1000,
         model="claude-3-5-haiku-latest",
+        system=system_prompt,
         messages=[
-            {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
         ]
     )

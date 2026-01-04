@@ -49,8 +49,8 @@ def generate(schema, query):
     response = client.messages.create(
         max_tokens=1000,
         model="claude-haiku-4-5",
+        system=system_prompt,
         messages=[
-            {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt}
         ]
     )

@@ -4,7 +4,8 @@ import re
 def validate(sql_query, allowed_tables=None):
     sql = sql_query.lower()
     
-    allowed_tables = [table.lower() for table in allowed_tables]
+    if allowed_tables:
+        allowed_tables = [table.lower() for table in allowed_tables]
 
     dangerous_keywords = ['drop', 'delete', 'update', 'insert', 'alter', 'truncate', 'exec', 'execute', 'create', 'grant', 'revoke']
 

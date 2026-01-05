@@ -17,6 +17,7 @@ def generate(schema, query):
     - ONLY use SELECT (no INSERT, UPDATE, DELETE, DROP, ALTER, TRUNCATE, MERGE, GRANT, or CALL)
     - Do NOT include comments, explanations, markdown, or formatting text
     - Do NOT ask questions
+    - Do NOT return the SQL as markdown
     - Do NOT assume columns or tables not present in the schema
     - Do NOT modify data
     - Do NOT use multiple statements
